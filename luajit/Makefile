@@ -199,7 +199,7 @@ TARGET_XSHLDFLAGS= -shared -fPIC -Wl,-soname,$(TARGET_SONAME)
 TARGET_DYNXLDOPTS=
 
 TARGET_LFSFLAGS= -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
-TARGET_XCFLAGS= $(TARGET_LFSFLAGS) -U_FORTIFY_SOURCE -I. -I./zlib
+TARGET_XCFLAGS= $(TARGET_LFSFLAGS) -U_FORTIFY_SOURCE -I. -I./zlib -I../src
 TARGET_XLDFLAGS=
 TARGET_XLIBS= -lm
 TARGET_TCFLAGS= $(CCOPTIONS) $(TARGET_XCFLAGS) $(TARGET_FLAGS) $(TARGET_CFLAGS)
@@ -483,7 +483,7 @@ LJCORE_O= lj_gc.o lj_err.o lj_char.o lj_bc.o lj_obj.o \
 	  lj_asm.o lj_trace.o lj_gdbjit.o \
 	  lj_ctype.o lj_cdata.o lj_cconv.o lj_ccall.o lj_ccallback.o \
 	  lj_carith.o lj_clib.o lj_cparse.o \
-	  lj_lib.o lj_alloc.o lib_aux.o mem_buf.o \
+	  lj_lib.o lj_alloc.o lib_aux.o ../src/mem_buf.o \
 	  $(ZLIB_O) $(LSOCKET_O) $(CJSON_O) $(LJLIB_O) lib_init.o
 
 LJVMCORE_O= $(LJVM_O) $(LJCORE_O)
@@ -506,7 +506,7 @@ ZLIB_RM= zlib/*.o
 LSOCKET_RM= lsocket/*.o
 CJSON_RM= cjson/*.o
 ALL_RM= $(ALL_T) $(ALL_GEN) *.o host/*.o $(WIN_RM) $(ZLIB_RM) $(LSOCKET_RM) \
-     $(CJSON_RM)
+     $(CJSON_RM) ../src/*.o
 
 ##############################################################################
 # Build mode handling.
